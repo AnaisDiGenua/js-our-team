@@ -61,3 +61,39 @@ for (let i = 0; i < cardArray.length; i++) {
 // stampo le card nel container
 document.querySelector('.team-container').innerHTML = cardContent;
 
+
+// aggiunta nuove card
+const addBtn = document.getElementById('addMemberButton');
+let newCard = '';
+
+addBtn.addEventListener("click", function() {
+
+    // salvo i valori degli input
+    const addName = document.getElementById('name').value;
+    console.log(addName);
+    const addRole = document.getElementById('role').value;
+    console.log(addRole);
+    const addImage = document.getElementById('image').value
+    console.log(addImage);
+
+
+    // creazione nuova card
+    newCard += 
+    `
+    <div class="team-card">
+        <div class="card-image">
+            <img src=${addImage} alt=${addName}/>
+        </div>
+        <div class="card-text">
+            <h3>${addName}</h3>
+            <p>${addRole}</p>
+        </div>
+    </div>
+    `;
+
+    // stampo nel container
+    document.querySelector('.team-container').innerHTML += newCard;
+
+})
+
+
