@@ -37,29 +37,36 @@ console.log(cardArray);
 
 
 
-// variabile che conterrà il contenuto delle card
-let cardContent = '';
 
 
-// ciclo per generare le card
-for (let i = 0; i < cardArray.length; i++) {
 
-    cardContent += 
-    `
-    <div class="team-card">
-        <div class="card-image">
-            <img src=${cardArray[i]['image']} alt=${cardArray[i]['name']}/>
+// funzione per generare le card
+function addCard (array) {
+    // variabile che conterrà il contenuto delle card
+    let cardContent = '';
+
+    for (let i = 0; i < array.length; i++) {
+
+        cardContent += 
+        `
+        <div class="team-card">
+            <div class="card-image">
+                <img src=${array[i]['image']} alt=${array[i]['name']}/>
+            </div>
+            <div class="card-text">
+                <h3>${array[i]['name']}</h3>
+                <p>${array[i]['position']}</p>
+            </div>
         </div>
-        <div class="card-text">
-            <h3>${cardArray[i]['name']}</h3>
-            <p>${cardArray[i]['position']}</p>
-        </div>
-    </div>
-    `;
+        `;
+    }
+
+    return cardContent;
 }
 
+
 // stampo le card nel container
-document.querySelector('.team-container').innerHTML = cardContent;
+document.querySelector('.team-container').innerHTML = addCard(cardArray);
 
 
 // aggiunta nuove card
