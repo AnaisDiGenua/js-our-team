@@ -1,106 +1,113 @@
 const cardArray = [{
         image: 'img/wayne-barnett-founder-ceo.jpg',
         name: 'Wayne Barnett',
-        position: 'Founder & CEO'
+        role: 'Founder & CEO'
     },
     {
         image: 'img/angela-caroll-chief-editor.jpg',
         name: 'Angela Caroll',
-        position: 'Chief Editor'
+        role: 'Chief Editor'
     },
     {
         image: 'img/walter-gordon-office-manager.jpg',
         name: 'Walter Gordon',
-        position: 'Office Manager'
+        role: 'Office Manager'
     },
     {
         image: 'img/angela-lopez-social-media-manager.jpg',
         name: 'Angela Lopez',
-        position: 'Social Media Manager'
+        role: 'Social Media Manager'
     },
     {
         image: 'img/scott-estrada-developer.jpg',
         name: 'Scott Estrada',
-        position: 'Developer'
+        role: 'Developer'
     },
     {
         image: 'img/barbara-ramos-graphic-designer.jpg',
         name: 'Barbara Ramos',
-        position: 'Graphic Designer'
+        role: 'Graphic Designer'
     }
 ];
 
 
 
 
-console.log(cardArray);
+
+// richiamo la funzione
+printCard();
 
 
 
+
+// aggiunta nuove card al click
+const addBtn = document.getElementById('addMemberButton');
+addBtn.addEventListener("click", addNewMember);
+
+
+
+
+// funzione per stampare le card
+function printCard() {
+    for (let i = 0; i < cardArray.length; i++) {
+
+        // richiamo la funzione
+        generateCard(cardArray[i]);
+    
+    }
+}
+    
 
 
 
 // funzione per generare le card
-function addCard (array) {
-    // variabile che conterrà il contenuto delle card
-    let cardContent = '';
+function generateCard(array) {
 
-    for (let i = 0; i < array.length; i++) {
-
-        cardContent += 
+    // variabile contenitore card
+    const container = document.querySelector('.team-container');
+    container.innerHTML += 
         `
         <div class="team-card">
             <div class="card-image">
-                <img src=${array[i]['image']} alt=${array[i]['name']}/>
+                <img src=${array['image']} alt=${array['name']}/> 
             </div>
             <div class="card-text">
-                <h3>${array[i]['name']}</h3>
-                <p>${array[i]['position']}</p>
+                <h3>${array['name']}</h3>
+                <p>${array['role']}</p>
             </div>
         </div>
         `;
-    }
-
-    return cardContent;
 }
 
 
-// stampo le card nel container
-document.querySelector('.team-container').innerHTML = addCard(cardArray);
 
 
-// aggiunta nuove card
-const addBtn = document.getElementById('addMemberButton');
-let newCard = '';
-
-addBtn.addEventListener("click", function() {
+// funzione per aggiungere un nuovo membro
+function addNewMember() {
 
     // salvo i valori degli input
-    const addName = document.getElementById('name').value;
-    console.log(addName);
-    const addRole = document.getElementById('role').value;
-    console.log(addRole);
-    const addImage = document.getElementById('image').value
-    console.log(addImage);
+    const name = document.getElementById('name').value;
+    const role = document.getElementById('role').value;
+    const image = document.getElementById('image').value;
+    console.log(name, role, image);
+
+    // costruisco il nuovo oggetto
+    const newMember = {
+        image,
+        name,
+        role
+    };
+
+    cardArray.push(newMember);
+    generateCard(newMember);
+    
+}
 
 
-    // creazione nuova card
-    newCard += 
-    `
-    <div class="team-card">
-        <div class="card-image">
-            <img src=${addImage} alt=${addName}/>
-        </div>
-        <div class="card-text">
-            <h3>${addName}</h3>
-            <p>${addRole}</p>
-        </div>
-    </div>
-    `;
 
-    // stampo nel container
-    document.querySelector('.team-container').innerHTML += newCard;
 
-})
+
+
+
 
 
